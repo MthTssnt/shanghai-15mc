@@ -149,7 +149,31 @@ export default function App() {
         layers={layers} 
         getTooltip={getTooltipContent}
       >
-        <Map mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" />
+        <Map 
+  mapStyle={{
+    version: 8,
+    sources: {
+      'osm-tiles': {
+        type: 'raster',
+        tiles: [
+          'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        ],
+        tileSize: 256,
+        attribution: '© OpenStreetMap contributors'
+      }
+    },
+    layers: [
+      {
+        id: 'osm-tiles-layer',
+        type: 'raster',
+        source: 'osm-tiles',
+        minzoom: 0,
+        maxzoom: 19
+      }
+    ]
+  }}
+/>
       </DeckGL>
 
       {/* PANNEAU UI PRINCIPAL */}
